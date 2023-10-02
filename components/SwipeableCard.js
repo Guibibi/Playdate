@@ -4,13 +4,15 @@ import { Card, Text, IconButton } from "react-native-paper";
 
 export default function SwipeableCard(props) {
   const { height, width } = useWindowDimensions()
+
+  // Current position of the card
   const panPosition = useRef(new Animated.ValueXY()).current;
 
+  // Controls how to react to the movement of the card
   const panResponder = useRef(PanResponder.create({
     onStartShouldSetPanResponder: (evt, gestureState) => true,
     onPanResponderMove: (evt, gestureState) => {
       panPosition.setValue({ x: gestureState.dx, y: gestureState.dy })
-      console.log(panPosition.x)
     },
     onPanResponderRelease: (evt, gestureState) => {
       if (gestureState.dx > 120) {
@@ -33,6 +35,7 @@ export default function SwipeableCard(props) {
     }
   }))
 
+  // Clamp our rotation to mimic the swipeable card effect
   const panRotation = panPosition.x.interpolate({
     inputRange: [-width / 2, 0, height / 2],
     outputRange: ["-10deg", "0deg", "10deg"],
@@ -40,18 +43,18 @@ export default function SwipeableCard(props) {
   })
 
 
-  const dismissCard = () => {
-    // Callback for when the card gets dismissed
-    props.dismissCallback();
+  // Callback for when the card gets dismissed
+  const dismissCard = (index) => {
+    props.dismissCallback(index);
   }
 
   return (
-    <Animated.View style={{ transform: [{ translateX: panPosition.x }, { translateY: panPosition.y }, { rotate: panRotation }] }} {...panResponder.current.panHandlers}>
-      <Card>
-        <Card.Cover source={{ uri: 'https://images.dog.ceo/breeds/malamute/n02110063_11227.jpg' }} />
+    <Animated.View style={{ position: 'absolute', transform: [{ translateX: panPosition.x }, { translateY: panPosition.y }, { rotate: panRotation }] }} {...panResponder.current.panHandlers}>
+      <Card style={styles.cardContainer}>
+        <Card.Cover source={{ uri: props.imageUrl }} />
         <Card.Content style={styles.cardContent}>
-          <Text variant='titleLarge' style={styles.cardTitle}>Jack</Text>
-          <Text variant='bodyMedium'>Looking for some friends to go to the dogpark. I'm a very energtic dog who loves to play play and play!</Text>
+          <Text variant='titleLarge' style={styles.cardTitle}>{props.name}</Text>
+          <Text variant='bodyMedium'>{props.description}</Text>
         </Card.Content>
         <Card.Actions style={{ marginTop: 80 }}>
           <View style={styles.cardActions}>
@@ -63,6 +66,7 @@ export default function SwipeableCard(props) {
     </Animated.View>
   )
 }
+
 const styles = StyleSheet.create({
   cardContent: {
     paddingTop: 24
@@ -74,5 +78,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  cardContainer: {
+    width: 300,
   }
 })

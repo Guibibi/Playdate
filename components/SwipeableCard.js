@@ -44,8 +44,8 @@ export default function SwipeableCard(props) {
 
 
   // Callback for when the card gets dismissed
-  const dismissCard = (index) => {
-    props.dismissCallback(index);
+  const dismissCard = () => {
+    props.dismissCallback();
   }
 
   return (

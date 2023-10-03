@@ -8,8 +8,7 @@ export default function DiscoverScreen() {
 
   const [profiles, setProfiles] = useState([])
 
-  const dismissCallback = (index) => {
-    console.log('The index' + index);
+  const dismissCallback = () => {
     setProfiles(prevProfiles => prevProfiles.filter((profile, i) => i !== index))
     // TODO: Fix the removing part of the code
     // Could be caused by the .reverse (in the template) which create a copy of the array
@@ -33,7 +32,7 @@ export default function DiscoverScreen() {
     <View style={styles.container}>
       <Text style={styles.debug}>{profiles[0].name}</Text>
       {profiles.map((profile, i) => (
-        <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={() => dismissCallback(i)} key={i} />
+        <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={dismissCallback} key={i} />
       )).reverse()}
     </View>
   )

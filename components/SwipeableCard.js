@@ -4,6 +4,7 @@ import { Card, Text, IconButton } from "react-native-paper";
 
 export default function SwipeableCard(props) {
   const { height, width } = useWindowDimensions()
+  const SWIPE_THRESHOLD = 120;
 
   // Current position of the card
   const panPosition = useRef(new Animated.ValueXY()).current;
@@ -14,8 +15,9 @@ export default function SwipeableCard(props) {
     onPanResponderMove: (evt, gestureState) => {
       panPosition.setValue({ x: gestureState.dx, y: gestureState.dy })
     },
+    // Check if we swipe the card until a certain threshold to determine if we dismiss the card or not.
     onPanResponderRelease: (evt, gestureState) => {
-      if (gestureState.dx > 120) {
+      if (gestureState.dx > SWIPE_THRESHOLD) {
         Animated.spring(panPosition, {
           toValue: { x: width + 100, y: gestureState.dy },
           useNativeDriver: true
@@ -23,7 +25,7 @@ export default function SwipeableCard(props) {
           // Dismiss the card when we swipe it to the right.
           dismissCard()
         })
-      } else if (gestureState.dx < -120) {
+      } else if (gestureState.dx < -SWIPE_THRESHOLD) {
         Animated.spring(panPosition, {
           toValue: { x: -width, y: gestureState.dy },
           useNativeDriver: true,
@@ -32,6 +34,7 @@ export default function SwipeableCard(props) {
           dismissCard()
         })
       } else {
+        // Resets the card in the middle if we haven't gone past the threshold
         Animated.spring(panPosition, {
           toValue: {x: 0, y: 0},
           friction: 4,

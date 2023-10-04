@@ -31,6 +31,12 @@ export default function SwipeableCard(props) {
           // Dismiss the card when we swipe it to the left.
           dismissCard()
         })
+      } else {
+        Animated.spring(panPosition, {
+          toValue: {x: 0, y: 0},
+          friction: 4,
+          useNativeDriver: true
+        }).start()
       }
     }
   }))

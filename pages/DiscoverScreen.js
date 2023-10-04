@@ -16,7 +16,7 @@ export default function DiscoverScreen() {
 
   // "Fetch" a dog and add it to our profiles
   const fetchDogs = async () => {
-    if (profiles.length < 20 > 10) {
+    if (profiles.length < 20 ) {
       createDog().then((dog) => {
         setProfiles((prevArr) => ([...prevArr, dog]))
       })

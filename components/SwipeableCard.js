@@ -1,8 +1,8 @@
-import { useRef, memo } from "react";
+import { useRef, } from "react";
 import { StyleSheet, View, Animated, PanResponder, useWindowDimensions } from "react-native";
 import { Card, Text, IconButton } from "react-native-paper";
 
-const  SwipeableCard = memo((props) => {
+export default function SwipeableCard(props) {
   const { height, width } = useWindowDimensions()
 
   // Current position of the card
@@ -71,7 +71,7 @@ const  SwipeableCard = memo((props) => {
       </Card >
     </Animated.View>
   )
-})
+}
 
 const styles = StyleSheet.create({
   cardContent: {
@@ -89,5 +89,3 @@ const styles = StyleSheet.create({
     width: 300,
   }
 })
-
-export default SwipeableCard;

@@ -59,7 +59,7 @@ export default function SwipeableCard(props) {
 
   return (
     <Animated.View style={{ position: 'absolute', transform: [{ translateX: panPosition.x }, { translateY: panPosition.y }, { rotate: panRotation }] }} {...panResponder.current.panHandlers}>
-      <Card style={styles.cardContainer}>
+      <Card mode='contained' style={styles.cardContainer}>
         <Card.Cover source={{ uri: props.imageUrl }} />
         <Card.Content style={styles.cardContent}>
           <Text variant='titleLarge' style={styles.cardTitle}>{props.name}</Text>

@@ -8,10 +8,13 @@ export default function DiscoverScreen() {
 
   const [profiles, setProfiles] = useState([])
 
+  //const [cardIndex, setCardIndex] = useState(0)
+
   const dismissCallback = () => {
-    setProfiles(prevProfiles => prevProfiles.filter((profile, i) => i !== index))
-    // TODO: Fix the removing part of the code
-    // Could be caused by the .reverse (in the template) which create a copy of the array
+    // NOTE: I could track the index and make it so that we fetch more profiles if we get 
+    // close to the end of the array
+    
+    //setCardIndex((prevIndex) => prevIndex + 1);
   }
 
   // "Fetch" a dog and add it to our profiles
@@ -30,7 +33,6 @@ export default function DiscoverScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.debug}>{profiles[0].name}</Text>
       {profiles.map((profile, i) => (
         <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={dismissCallback} key={i} />
       )).reverse()}
@@ -50,8 +52,4 @@ const styles = StyleSheet.create({
   cardTitle: {
     marginBottom: 8
   },
-  debug: {
-    position: 'absolute',
-    top: 30
-  }
 })

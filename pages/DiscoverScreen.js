@@ -7,7 +7,6 @@ import { createDog } from "../helpers/Dog";
 export default function DiscoverScreen() {
 
   const [profiles, setProfiles] = useState([])
-  const [shouldFetch, setShouldFetch ] = useState(true);
 
   const dismissCallback = () => {
     setProfiles((prevProfiles) => prevProfiles.slice(1));
@@ -31,7 +30,7 @@ export default function DiscoverScreen() {
   //WARNING: Lag starts when rendering too much elements, investigating way to optimise performance.
   return (
     <View style={styles.container}>
-      {profiles.map((profile, i) => (
+      {profiles.slice(0, 5).map((profile, i) => (
         <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={dismissCallback} id={profile.id} key={profile.id} />
       )).reverse()}
     </View>

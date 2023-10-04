@@ -7,19 +7,19 @@ import { createDog } from "../helpers/Dog";
 export default function DiscoverScreen() {
 
   const [profiles, setProfiles] = useState([])
+  const [shouldFetch, setShouldFetch ] = useState(true);
 
   const dismissCallback = () => {
-    // NOTE: I could track the index and make it so that we fetch more profiles if we get 
-    // close to the end of the array
     setProfiles((prevProfiles) => prevProfiles.slice(1));
   }
 
   // "Fetch" a dog and add it to our profiles
   const fetchDogs = async () => {
-    if (profiles.length < 20 ) {
-      createDog().then((dog) => {
-        setProfiles((prevArr) => ([...prevArr, dog]))
-      })
+    if (profiles.length <= 5 ) {
+      const newProfiles = await Promise.all(
+        Array.from({length: 20}, createDog)
+      );
+        setProfiles((prevProfiles) => ([...prevProfiles, ...newProfiles]))
     }
   }
 
@@ -28,6 +28,7 @@ export default function DiscoverScreen() {
     fetchDogs();
   }, [profiles.length])
 
+  //WARNING: Lag starts when rendering too much elements, investigating way to optimise performance.
   return (
     <View style={styles.container}>
       {profiles.map((profile, i) => (

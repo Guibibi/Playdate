@@ -8,18 +8,15 @@ export default function DiscoverScreen() {
 
   const [profiles, setProfiles] = useState([])
 
-  //const [cardIndex, setCardIndex] = useState(0)
-
   const dismissCallback = () => {
     // NOTE: I could track the index and make it so that we fetch more profiles if we get 
     // close to the end of the array
-    
-    //setCardIndex((prevIndex) => prevIndex + 1);
+    setProfiles((prevProfiles) => prevProfiles.slice(1));
   }
 
   // "Fetch" a dog and add it to our profiles
   const fetchDogs = async () => {
-    if (profiles.length < 20) {
+    if (profiles.length < 20 > 10) {
       createDog().then((dog) => {
         setProfiles((prevArr) => ([...prevArr, dog]))
       })
@@ -34,7 +31,7 @@ export default function DiscoverScreen() {
   return (
     <View style={styles.container}>
       {profiles.map((profile, i) => (
-        <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={dismissCallback} key={i} />
+        <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={dismissCallback} id={profile.id} key={profile.id} />
       )).reverse()}
     </View>
   )

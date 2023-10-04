@@ -9,6 +9,8 @@ class Dog {
 }
 
 export async function createDog(name, description) {
+  // Add a small delay (else we get the same image back);
+  await new Promise((resolve) => setTimeout(resolve, 300));
   // Fetch a random dog image from the API
   const response = await fetch("https://dog.ceo/api/breeds/image/random");
   const data = await response.json();

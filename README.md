@@ -1,4 +1,4 @@
-# PlayData
+# PlayDate
 An (WIP) Open-Source React Native application to find a playdate for dogs!
 
 With a Tinder like UI and a chat, you can now find your next dog best friend.

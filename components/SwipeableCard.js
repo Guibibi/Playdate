@@ -67,6 +67,7 @@ export default function SwipeableCard(props) {
     props.onSwipeLeft()
   }
 
+  // Callback for when right button gets pressed
   const onPressRightButton = () => {
     props.onSwipeRight()
   }

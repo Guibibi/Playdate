@@ -11,14 +11,12 @@ export default function DiscoverScreen() {
   // Called when SwipeableCard swipes left.
   const onSwipeLeft = () => {
     //Remove the profile from the array after dismissing it.
-    console.log('Swiped left!')
     setProfiles((prevProfiles) => prevProfiles.slice(1));
   }
 
   // Called when SwipeableCard swipes right.
   const onSwipeRight = () => {
     //Remove the profile from the array after dismissing it.
-    console.log('Swiped right!')
     setProfiles((prevProfiles) => prevProfiles.slice(1));
   }
 

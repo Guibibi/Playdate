@@ -1,17 +1,15 @@
 # PlayDate
-An (WIP) Open-Source React Native application to find a playdate for dogs!
+PlayDate is an open-source React Native app that helps you find a playdate for your dog. You can swipe through profiles of other dogs in your area, chat with their owners, and arrange a meetup. Whether you want to socialize your pup, find a new friend, or just have some fun, PlayDate is the app for you!
 
-With a Tinder like UI and a chat, you can now find your next dog best friend.
+## Features
+- Swipe right to like or left to pass on other dogs
+- Match with dogs that like you back
+- Chat with dog owners and get to know them better
+- Set up a playdate at a nearby park or dog-friendly location
 
-## Technologies
-- React Native (Expo)
-- React Navigation
-- React Native Paper
-
-
-## Installation Steps
-
-- Clone the Repo using **git**
-- Cd to the directory `cd playdate`
-- Install packages with `npm install`
-- Start the application with `npm run start`
+## How to use
+- Clone the repo using **git**
+- Navigate to the project directory `cd playdate`
+- Install dependencies with `npm install`
+- Start the app with `npm run start`
+- Enjoy! 🐶

@@ -8,7 +8,17 @@ export default function DiscoverScreen() {
 
   const [profiles, setProfiles] = useState([])
 
-  const dismissCallback = () => {
+  // Called when SwipeableCard swipes left.
+  const onSwipeLeft = () => {
+    //Remove the profile from the array after dismissing it.
+    console.log('Swiped left!')
+    setProfiles((prevProfiles) => prevProfiles.slice(1));
+  }
+
+  // Called when SwipeableCard swipes right.
+  const onSwipeRight = () => {
+    //Remove the profile from the array after dismissing it.
+    console.log('Swiped right!')
     setProfiles((prevProfiles) => prevProfiles.slice(1));
   }
 
@@ -27,11 +37,10 @@ export default function DiscoverScreen() {
     fetchDogs();
   }, [profiles.length])
 
-  //WARNING: Lag starts when rendering too much elements, investigating way to optimise performance.
   return (
     <View style={styles.container}>
       {profiles.slice(0, 5).map((profile, i) => (
-        <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} dismissCallback={dismissCallback} id={profile.id} key={profile.id} />
+        <SwipeableCard name={profile.name} description={profile.description} imageUrl={profile.imageUrl} onSwipeLeft={onSwipeLeft} onSwipeRight={onSwipeRight} id={profile.id} key={profile.id} />
       )).reverse()}
     </View>
   )

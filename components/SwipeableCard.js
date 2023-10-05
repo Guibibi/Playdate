@@ -22,16 +22,16 @@ export default function SwipeableCard(props) {
           toValue: { x: width + 100, y: gestureState.dy },
           useNativeDriver: true
         }).start(() => {
-          // Dismiss the card when we swipe it to the right.
-          dismissCard()
+          // User has swiped card to the right
+          onSwipeRight()
         })
       } else if (gestureState.dx < -SWIPE_THRESHOLD) {
         Animated.spring(panPosition, {
           toValue: { x: -width, y: gestureState.dy },
           useNativeDriver: true,
         }).start(() => {
-          // Dismiss the card when we swipe it to the left.
-          dismissCard()
+          // User has swiped card to the left
+          onSwipeLeft()
         })
       } else {
         // Resets the card in the middle if we haven't gone past the threshold
@@ -52,9 +52,23 @@ export default function SwipeableCard(props) {
   })
 
 
-  // Callback for when the card gets dismissed
-  const dismissCard = () => {
-    props.dismissCallback();
+  // Callback for when the card gets swiped right
+  const onSwipeLeft = () => {
+    props.onSwipeLeft();
+  }
+
+  // Callback for when the card gets swiped left
+  const onSwipeRight = () => {
+    props.onSwipeRight();
+  }
+
+  // Callback for when left button gets pressed
+  const onPressLeftButton = () => {
+    props.onSwipeLeft()
+  }
+
+  const onPressRightButton = () => {
+    props.onSwipeRight()
   }
 
   return (
@@ -67,8 +81,8 @@ export default function SwipeableCard(props) {
         </Card.Content>
         <Card.Actions style={{ marginTop: 80 }}>
           <View style={styles.cardActions}>
-            <IconButton onPress={dismissCard} mode='contained' icon='window-close' size={40} iconColor='red' containerColor='white' />
-            <IconButton onPress={dismissCard} mode='contained' icon='check' size={40} iconColor='green' containerColor='white' />
+            <IconButton onPress={onPressLeftButton} mode='contained' icon='window-close' size={40} iconColor='red' containerColor='white' />
+            <IconButton onPress={onSwipeRight} mode='contained' icon='check' size={40} iconColor='green' containerColor='white' />
           </View>
         </Card.Actions>
       </Card >
